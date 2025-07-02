@@ -1,28 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neighborhoods in Flux: COVID NYC</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    header { background: #333; color: #fff; padding: 1rem 0; text-align: center; }
-    nav { background: #444; padding: 0.5rem; text-align: center; }
-    nav a { color: #fff; margin: 0 1rem; text-decoration: none; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
-    section { margin-bottom: 2rem; }
-    h1, h2 { color: #333; }
-    iframe, arcgis-embedded-map { display: block; margin: 1rem auto; }
-    footer { background: #333; color: #fff; text-align: center; padding: 1rem 0; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ccc;
+      color: #000;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    nav {
+      background: #222; /* Improved contrast */
+      padding: 0.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    .map-container {
+      width: 100%;
+      position: relative;
+      padding-top: 85%; /* Maintain aspect ratio */
+      margin: 1rem 0;
+    }
+
+    .map-container iframe,
+    .map-container arcgis-embedded-map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 
   <script type="module" src="https://js.arcgis.com/embeddable-components/4.33/arcgis-embeddable-components.esm.js"></script>
 </head>
 <body>
+
   <header>
     <h1>Neighborhoods in Flux: COVID NYC</h1>
+    <h2>COVID-19 Mapping Project – Spring 2025</h2>
   </header>
+
   <nav>
     <a href="#abstract">Abstract</a>
     <a href="#introduction">Introduction</a>
@@ -33,62 +100,77 @@
     <a href="#conclusion">Conclusion</a>
     <a href="#references">References</a>
   </nav>
+
   <main>
     <section id="abstract">
       <h2>Abstract</h2>
       <p>Our project explores the spatial and temporal evolution of COVID-19 transmission across New York City neighborhoods. Using publicly available health datasets and MODZCTA boundaries to define neighborhood units, we visualized case trends over time to highlight the uneven impact of the pandemic. Due to platform limitations, we created a series of layered maps on three key dates: March 4, April 4, and May 4, 2025. Darker color intensity indicates higher case counts, allowing users to interpret hotspots. Targeted at community health professionals and policymakers, our work offers an accessible snapshot of transmission patterns and serves as a potential tool for future health response planning.</p>
     </section>
+
     <section id="introduction">
       <h2>Introduction</h2>
       <p>The COVID-19 pandemic exposed stark disparities in how communities experience public health crises. In a dense and diverse city like New York, understanding neighborhood-level spread is critical. This project visualizes COVID-19 transmission using MODZCTA boundaries, enabling users to explore spatial patterns over three snapshots. Our goal is to support equitable decision-making by providing clear, interpretable visualizations through ArcGIS layered mapping.</p>
     </section>
+
     <section id="problem">
       <h2>Problem Statement</h2>
       <p>Health officials and community organizations lacked accessible tools to identify transmission hotspots quickly. We addressed this gap by mapping case rates at the neighborhood level on March 4, April 4, and May 4, 2025, using MODZCTAs to provide granular insights into where outbreaks intensified or waned.</p>
     </section>
+
     <section id="data">
       <h2>Data</h2>
       <p>We used 7-day average COVID-19 transmission data from the New York State Department of Health (CSV) and MODZCTA GeoJSON boundaries. Data preprocessing was performed in Python to clean and align fields. The three dates capture key phases of the outbreak, balancing epidemiological significance with data availability.</p>
     </section>
+
     <section id="visualizations">
       <h2>Visualizations</h2>
       <p>We created choropleth maps for each date, with darker shades indicating higher transmission rates.</p>
+
       <!-- March 4 Map -->
-      <arcgis-embedded-map
-        style="height:600px;width:700px;"
-        item-id="3d2576a58aaa4be2af2d4848935ea9a0"
-        theme="dark"
-        heading-enabled
-        legend-enabled
-        center="-73.97847234791215,40.7061462066957"
-        scale="288895.277144"
-        portal-url="https://sdsugeo.maps.arcgis.com">
-      </arcgis-embedded-map>
+      <div class="map-container">
+        <arcgis-embedded-map
+          item-id="3d2576a58aaa4be2af2d4848935ea9a0"
+          theme="dark"
+          heading-enabled
+          legend-enabled
+          center="-73.97847234791215,40.7061462066957"
+          scale="288895.277144"
+          portal-url="https://sdsugeo.maps.arcgis.com">
+        </arcgis-embedded-map>
+      </div>
+
       <!-- April 4 Map -->
-      <arcgis-embedded-map
-        style="height:600px;width:700px;"
-        item-id="2224dfa52bf349da976bb28beeacb324"
-        theme="dark"
-        heading-enabled
-        legend-enabled
-        center="-73.98289117574404,40.70410847586782"
-        scale="288895.277144"
-        portal-url="https://sdsugeo.maps.arcgis.com">
-      </arcgis-embedded-map>
+      <div class="map-container">
+        <arcgis-embedded-map
+          item-id="2224dfa52bf349da976bb28beeacb324"
+          theme="dark"
+          heading-enabled
+          legend-enabled
+          center="-73.98289117574404,40.70410847586782"
+          scale="288895.277144"
+          portal-url="https://sdsugeo.maps.arcgis.com">
+        </arcgis-embedded-map>
+      </div>
+
       <!-- May 4 Map -->
-      <arcgis-embedded-map
-        style="height:600px;width:700px;"
-        item-id="52e0203177bb45a79f9dc36bcb956617"
-        theme="dark"
-        heading-enabled
-        legend-enabled
-        center="-73.97808465718933,40.70619059303194"
-        scale="288895.277144"
-        portal-url="https://sdsugeo.maps.arcgis.com">
-      </arcgis-embedded-map>
+      <div class="map-container">
+        <arcgis-embedded-map
+          item-id="52e0203177bb45a79f9dc36bcb956617"
+          theme="dark"
+          heading-enabled
+          legend-enabled
+          center="-73.97808465718933,40.70619059303194"
+          scale="288895.277144"
+          portal-url="https://sdsugeo.maps.arcgis.com">
+        </arcgis-embedded-map>
+      </div>
+
       <p>We also included population context via Carto maps:</p>
-      <iframe width="640" height="360" src="https://clausa.app.carto.com/map/8595b41a-8132-41fc-820a-35dd8dacba2d"></iframe>
+      <div class="map-container">
+        <iframe src="https://clausa.app.carto.com/map/8595b41a-8132-41fc-820a-35dd8dacba2d" frameborder="0"></iframe>
+      </div>
     </section>
+
     <section id="limitations">
       <h2>Limitations and Challenges</h2>
       <ul>
@@ -97,17 +179,21 @@
         <li>Embedding interactive features like tooltips was limited by platform.</li>
       </ul>
     </section>
+
     <section id="conclusion">
       <h2>Conclusion</h2>
       <p>Neighborhood-scale mapping revealed how transmission peaked in areas such as the Bronx and central Brooklyn before declining. These visual insights can guide equitable resource allocation and rapid response in future health crises.</p>
     </section>
+
     <section id="references">
       <h2>References</h2>
       <p>New York State Department of Health, ArcGIS embeddable components documentation, Carto population map.</p>
     </section>
   </main>
+
   <footer>
     <p>&copy; 2025 Amir, Charles, Yousuf &amp; Jasmine</p>
   </footer>
+
 </body>
 </html>
